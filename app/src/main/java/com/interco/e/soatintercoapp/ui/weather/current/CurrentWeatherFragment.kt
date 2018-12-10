@@ -1,12 +1,17 @@
 package com.interco.e.soatintercoapp.ui.weather.current
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.interco.e.soatintercoapp.R
+import com.interco.e.soatintercoapp.data.ApixuWeatherApiService
+import kotlinx.android.synthetic.main.current_weather_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class CurrentWeatherFragment : Fragment() {
@@ -28,6 +33,13 @@ class CurrentWeatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
         // TODO: Use the ViewModel
+
+
+        val apiSErvice = ApixuWeatherApiService();
+
+        GlobalScope.launch(Dispatchers.Main) {
+            textView_ok.text = apiSErvice.getCetcurrentWeather("london").await().toString()
+        }
     }
 
 }

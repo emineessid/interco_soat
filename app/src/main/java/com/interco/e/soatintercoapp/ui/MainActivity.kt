@@ -7,7 +7,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.interco.e.soatintercoapp.R
+import com.interco.e.soatintercoapp.data.ApixuWeatherApiService
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         bottom_nav.setupWithNavController(navController)
         NavigationUI.setupActionBarWithNavController(this, navController)
+
+
 
     }
 
