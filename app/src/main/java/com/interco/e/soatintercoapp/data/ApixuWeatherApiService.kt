@@ -1,5 +1,6 @@
 package com.interco.e.soatintercoapp.data
 
+import com.interco.e.soatintercoapp.data.network.ConnectivityInterceptorImpl
 import com.interco.e.soatintercoapp.data.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -28,7 +29,7 @@ interface ApixuWeatherApiService {
     ): Deferred<CurrentWeatherResponse>
 
     companion object {
-        operator fun invoke(): ApixuWeatherApiService {
+        operator fun invoke(connectivityInterceptorImpl: ConnectivityInterceptorImpl): ApixuWeatherApiService {
 
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request().url().newBuilder().addQueryParameter("key", API_KEY).build()
@@ -36,7 +37,10 @@ interface ApixuWeatherApiService {
                 return@Interceptor chain.proceed(request)
 
             }
-            val okHttpClient = OkHttpClient.Builder().addInterceptor(requestInterceptor).build()
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptorImpl)
+                .build()
             return Retrofit
                 .Builder()
                 .client(okHttpClient)
