@@ -1,4 +1,4 @@
-package com.interco.e.soatintercoapp.data.response
+package com.interco.e.soatintercoapp.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 
