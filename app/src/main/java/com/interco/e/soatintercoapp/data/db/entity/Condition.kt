@@ -1,4 +1,4 @@
-package com.interco.e.soatintercoapp.data.response
+package com.interco.e.soatintercoapp.data.db.entity
 
 data class Condition(
     val code: Int,

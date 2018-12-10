@@ -1,6 +1,6 @@
 package com.interco.e.soatintercoapp.data
 
-import com.interco.e.soatintercoapp.data.response.CurrentWeatherResponse
+import com.interco.e.soatintercoapp.data.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
