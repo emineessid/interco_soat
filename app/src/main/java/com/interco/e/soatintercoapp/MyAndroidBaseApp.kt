@@ -9,6 +9,7 @@ import com.interco.e.soatintercoapp.data.network.WeatherNetworkDataSource
 import com.interco.e.soatintercoapp.data.network.WeatherNetworkDataSourceImpl
 import com.interco.e.soatintercoapp.data.repository.ForcastREpository
 import com.interco.e.soatintercoapp.data.repository.ForcastRepositoryImpl
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidModule
@@ -20,7 +21,7 @@ import org.kodein.di.generic.singleton
  * Created by emine on 10/12/2018.
  */
 
-class MyAndroidBaseApp : Application, KodeinAware {
+class MyAndroidBaseApp : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidModule(this@MyAndroidBaseApp))
         //INJECT DATABASE !
@@ -37,5 +38,8 @@ class MyAndroidBaseApp : Application, KodeinAware {
 
     }
 
-    constructor() : super()
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+    }
 }
