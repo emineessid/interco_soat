@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.interco.e.soatintercoapp.R
 
-import com.resocoder.forecastmvvm.R
 
 class FutureDetailWeatherFragment : Fragment() {
 
