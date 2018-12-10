@@ -1,5 +1,6 @@
 package com.interco.e.soatintercoapp.data.db.entity
 
+import androidx.annotation.NonNull
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER_FIXED_ID = 0
 
-@Entity(tableName = "Current_weather")
+@Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
     @Embedded(prefix = "condition_")
     val condition: Condition,
@@ -42,5 +43,7 @@ data class CurrentWeatherEntry(
     val windMph: Double
 ) {
     @PrimaryKey(autoGenerate = false)
-    val id: Int = CURRENT_WEATHER_FIXED_ID
+    @NonNull
+    var id: Int = CURRENT_WEATHER_FIXED_ID
+
 }

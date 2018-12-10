@@ -36,7 +36,7 @@ class CurrentWeatherFragment : Fragment() {
         // TODO: Use the ViewModel
 
 
-        val apiSErvice = ApixuWeatherApiService(ConnectivityInterceptorImpl(this.context!!));
+        val apiSErvice = ApixuWeatherApiService(ConnectivityInterceptorImpl(activity!!.applicationContext));
 
         GlobalScope.launch(Dispatchers.Main) {
             textView_ok.text = apiSErvice.getCetcurrentWeather("london").await().toString()
