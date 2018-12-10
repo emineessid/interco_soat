@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER_FIXED_ID = 0
 
-@Entity(tableName = "CurrentWeather")
+@Entity(tableName = "Current_weather")
 data class CurrentWeatherEntry(
     @Embedded(prefix = "condition_")
     val condition: Condition,
