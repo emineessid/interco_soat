@@ -6,6 +6,6 @@ import com.interco.e.soatintercoapp.data.db.entity.Location
 
 data class CurrentWeatherResponse(
     @SerializedName("Current")
-    val current: CurrentWeatherEntry,
+    val currentWeatherEntry: CurrentWeatherEntry,
     val location: Location
 )
