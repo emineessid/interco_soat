@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.interco.e.soatintercoapp.R
 import com.interco.e.soatintercoapp.data.ApixuWeatherApiService
+import com.interco.e.soatintercoapp.data.network.ConnectivityInterceptorImpl
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,7 +36,7 @@ class CurrentWeatherFragment : Fragment() {
         // TODO: Use the ViewModel
 
 
-        val apiSErvice = ApixuWeatherApiService();
+        val apiSErvice = ApixuWeatherApiService(ConnectivityInterceptorImpl(this.context!!));
 
         GlobalScope.launch(Dispatchers.Main) {
             textView_ok.text = apiSErvice.getCetcurrentWeather("london").await().toString()
