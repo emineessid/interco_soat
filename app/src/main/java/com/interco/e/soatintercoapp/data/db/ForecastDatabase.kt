@@ -11,7 +11,8 @@ import com.interco.e.soatintercoapp.data.db.entity.CurrentWeatherEntry
  */
 @Database(
     entities = [CurrentWeatherEntry::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDao(): CurrentWeatherDao

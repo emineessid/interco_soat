@@ -23,7 +23,6 @@ import org.kodein.di.generic.singleton
 /**
  * Created by emine on 10/12/2018.
  */
-@GlideModule
 class MyAndroidBaseApp : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidModule(this@MyAndroidBaseApp))
