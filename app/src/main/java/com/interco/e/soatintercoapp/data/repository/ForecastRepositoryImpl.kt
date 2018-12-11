@@ -12,10 +12,10 @@ import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 import java.util.*
 
-class ForcastRepositoryImpl(
+class ForecastRepositoryImpl(
     private val currentWeatherDao: CurrentWeatherDao,
     private val weatherNetworkDataSource: WeatherNetworkDataSource
-) : ForcastREpository {
+) : ForecastRepository {
 
     init {
         weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->

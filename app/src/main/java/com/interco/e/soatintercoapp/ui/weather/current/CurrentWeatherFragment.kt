@@ -18,8 +18,7 @@ import org.kodein.di.generic.instance
 class CurrentWeatherFragment : ScopedBaseFragment(), KodeinAware {
 
     override val kodein by closestKodein()
-
-    private val CurrentWeatherViewModelFactory: CurrentWeatherViewModelFactory  by instance() // get last injected instance !
+    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentWeatherViewModel
 
@@ -32,18 +31,20 @@ class CurrentWeatherFragment : ScopedBaseFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, CurrentWeatherViewModelFactory).get(CurrentWeatherViewModel::class.java)
 
-        bindUi()
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(CurrentWeatherViewModel::class.java)
 
-
+        bindUI()
     }
 
-    private fun bindUi() = launch {
+    private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
+
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
             if (it == null) return@Observer
-            textView_ok.text = it.toString()!!
+            textView_ok.text = "============ IT WORKS ============== \n ${it.toString()!!}"
+
         })
     }
 

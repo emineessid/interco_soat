@@ -1,5 +1,6 @@
 package com.interco.e.soatintercoapp.ui.base
 
+import android.os.Bundle
 import android.view.ContextMenu
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -17,13 +18,13 @@ abstract class ScopedBaseFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
-    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-        super.onCreateContextMenu(menu, v, menuInfo)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         job = Job()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         job.cancel()
     }
 }
