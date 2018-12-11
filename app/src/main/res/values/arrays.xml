@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unitSystemvalude">
+        <item>
+            METRIC
+        </item>
+        <item>IEMPERIAL</item>
+    </string-array>
+
+    <string-array name="unitSysteEntrys">
+        <item>
+            metric
+        </item>
+        <item>imperial</item>
+    </string-array>
+</resources>

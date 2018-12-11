@@ -1,13 +1,15 @@
 package com.interco.e.soatintercoapp
 
 import android.app.Application
-import com.bumptech.glide.annotation.GlideModule
+import android.preference.PreferenceManager
 import com.interco.e.soatintercoapp.data.ApixuWeatherApiService
 import com.interco.e.soatintercoapp.data.db.ForecastDatabase
 import com.interco.e.soatintercoapp.data.network.ConnectivityInterceptor
 import com.interco.e.soatintercoapp.data.network.ConnectivityInterceptorImpl
 import com.interco.e.soatintercoapp.data.network.WeatherNetworkDataSource
 import com.interco.e.soatintercoapp.data.network.WeatherNetworkDataSourceImpl
+import com.interco.e.soatintercoapp.data.provider.UnitProvider
+import com.interco.e.soatintercoapp.data.provider.UnitProviderImpl
 import com.interco.e.soatintercoapp.data.repository.ForecastRepository
 import com.interco.e.soatintercoapp.data.repository.ForecastRepositoryImpl
 import com.interco.e.soatintercoapp.ui.weather.current.CurrentWeatherViewModelFactory
@@ -33,13 +35,18 @@ class MyAndroidBaseApp : Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { ApixuWeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
+
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
 
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
     }
 }
