@@ -1,5 +1,6 @@
 package com.interco.e.soatintercoapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.interco.e.soatintercoapp.data.db.CurrentWeatherDao
 import com.interco.e.soatintercoapp.data.db.unitLocalised.UnitSpecificCurrentWeatherEnty
@@ -34,7 +35,12 @@ class ForecastRepositoryImpl(
 
     private fun persistFeachedCurrentWeather(feachedWeather: CurrentWeatherResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            currentWeatherDao.upsert(feachedWeather.currentWeatherEntry)
+            try {
+                currentWeatherDao.upsert(feachedWeather.currentWeatherEntry)
+
+            } catch (e: Exception) {
+                Log.e(" Oups", e.message)
+            }
         }
     }
 

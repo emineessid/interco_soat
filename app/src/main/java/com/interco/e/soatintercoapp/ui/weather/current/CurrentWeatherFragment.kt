@@ -1,6 +1,8 @@
 package com.interco.e.soatintercoapp.ui.weather.current
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,8 +40,10 @@ class CurrentWeatherFragment : ScopedBaseFragment(), KodeinAware {
         bindUI()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
+
 
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
             if (it == null) return@Observer

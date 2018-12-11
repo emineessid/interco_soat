@@ -7,5 +7,4 @@ import okhttp3.Interceptor
  * Created by emine on 10/12/2018.
  */
 interface ConnectivityInterceptor: Interceptor {
-    fun isUserHaveInternet(): Boolean
 }
