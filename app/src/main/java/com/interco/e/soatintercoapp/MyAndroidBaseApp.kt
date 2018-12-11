@@ -1,6 +1,7 @@
 package com.interco.e.soatintercoapp
 
 import android.app.Application
+import com.bumptech.glide.annotation.GlideModule
 import com.interco.e.soatintercoapp.data.ApixuWeatherApiService
 import com.interco.e.soatintercoapp.data.db.ForecastDatabase
 import com.interco.e.soatintercoapp.data.network.ConnectivityInterceptor
@@ -22,7 +23,6 @@ import org.kodein.di.generic.singleton
 /**
  * Created by emine on 10/12/2018.
  */
-
 class MyAndroidBaseApp : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidModule(this@MyAndroidBaseApp))
