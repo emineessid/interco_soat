@@ -1,5 +1,6 @@
 package com.interco.e.soatintercoapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.interco.e.soatintercoapp.data.db.CurrentWeatherDao
 import com.interco.e.soatintercoapp.data.db.unitLocalised.UnitSpecificCurrentWeatherEnty
@@ -12,10 +13,10 @@ import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 import java.util.*
 
-class ForcastRepositoryImpl(
+class ForecastRepositoryImpl(
     private val currentWeatherDao: CurrentWeatherDao,
     private val weatherNetworkDataSource: WeatherNetworkDataSource
-) : ForcastREpository {
+) : ForecastRepository {
 
     init {
         weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->
@@ -34,7 +35,11 @@ class ForcastRepositoryImpl(
 
     private fun persistFeachedCurrentWeather(feachedWeather: CurrentWeatherResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            currentWeatherDao.upsert(feachedWeather.currentWeatherEntry)
+            if (feachedWeather != null && feachedWeather.currentWeatherEntry != null && feachedWeather.currentWeatherEntry.id != null)
+                currentWeatherDao.upsert(feachedWeather.currentWeatherEntry)
+            else
+                Log.e("fuck", "************************ \n ${feachedWeather.toString()} *****************")
+
         }
     }
 

@@ -6,6 +6,6 @@ import com.interco.e.soatintercoapp.data.db.unitLocalised.UnitSpecificCurrentWea
 /**
  * Created by emine on 10/12/2018.
  */
-interface ForcastREpository {
+interface ForecastRepository {
     suspend fun  getCurrentWeather(metric : Boolean):LiveData< out UnitSpecificCurrentWeatherEnty>
 }

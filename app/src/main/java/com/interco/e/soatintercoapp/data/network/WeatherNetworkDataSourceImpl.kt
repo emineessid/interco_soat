@@ -8,17 +8,16 @@ import com.interco.e.soatintercoapp.data.network.response.CurrentWeatherResponse
 
 class WeatherNetworkDataSourceImpl(private val apixuWeatherApiService: ApixuWeatherApiService) :
     WeatherNetworkDataSource {
-    private val _downloadedCurrentWeather: MutableLiveData<CurrentWeatherResponse> =
-        MutableLiveData<CurrentWeatherResponse>();
+    private val _downloadedCurrentWeather: MutableLiveData<CurrentWeatherResponse> = MutableLiveData();
     override val downloadedCurrentWeather: LiveData<CurrentWeatherResponse>
         get() = _downloadedCurrentWeather;
 
     override suspend fun feachCurrentWeather(location: String, laguageCode: String) {
         try {
-            val fetchedCurrentDataWeather = apixuWeatherApiService.getCetcurrentWeather(location, laguageCode).await()
+            val fetchedCurrentDataWeather = apixuWeatherApiService.getCurrentWeather(location, laguageCode).await()
             _downloadedCurrentWeather.postValue(fetchedCurrentDataWeather)
 
-        } catch (e: NoInternetExeption) {
+        } catch (e: NoConnectivityException) {
             Log.e("Connectivity", e.message)
         }
     }
