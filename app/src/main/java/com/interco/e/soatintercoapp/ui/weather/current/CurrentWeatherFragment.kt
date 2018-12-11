@@ -17,7 +17,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-
+@SuppressLint("SetTextI18n")
 class CurrentWeatherFragment : ScopedBaseFragment(), KodeinAware  {
 
     override val kodein by closestKodein()
@@ -92,6 +92,7 @@ class CurrentWeatherFragment : ScopedBaseFragment(), KodeinAware  {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm", "in")
         textView_precipitation.text = "Preciptiation: $precipitationVolume $unitAbbreviation"
     }
+
 
     private fun updateWind(windDirection: String, windSpeed: Double) {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph", "mph")
