@@ -35,12 +35,11 @@ class ForecastRepositoryImpl(
 
     private fun persistFeachedCurrentWeather(feachedWeather: CurrentWeatherResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            try {
+            if (feachedWeather != null && feachedWeather.currentWeatherEntry != null && feachedWeather.currentWeatherEntry.id != null)
                 currentWeatherDao.upsert(feachedWeather.currentWeatherEntry)
+            else
+                Log.e("fuck", "************************ \n ${feachedWeather.toString()} *****************")
 
-            } catch (e: Exception) {
-                Log.e(" Oups", e.message)
-            }
         }
     }
 
